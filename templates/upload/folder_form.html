@@ -1,0 +1,31 @@
+{% extends 'upload/base.html' %}
+{% block title %}Cloud | Add New Folder{% endblock %}
+{% block add_folder_active %}active{% endblock %}
+
+{% block navigation %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default" style="background: transparent">
+                <div class="panel-body">
+                    <h3>Add a New Folder</h3>
+                    {% if error_message %}
+                        <p><strong><font color="#dc143c">{{ error_message }}</font></strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'upload/form-template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-10">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

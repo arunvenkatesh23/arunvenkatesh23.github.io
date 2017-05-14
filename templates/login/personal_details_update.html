@@ -1,0 +1,116 @@
+{% extends 'upload/base.html' %}
+{% block title %}Cloud | Personal Details Update{% endblock %}
+{% block my_account_active %}active{% endblock %}
+{% load staticfiles %}
+{% block navigation%}
+    <div class="container-fluid files-container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="panel panel-default" style="background: transparent">
+                    <div class="panel-body">
+                        <div class="row">
+                            <h4>Personal Details Update Form</h4><br>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_username">
+                                    Username:
+                                </label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_email">
+                                    Email:
+                                </label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_first_name">
+                                    First Name:
+                                </label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_last_name">
+                                    Last Name:
+                                </label>
+                                {{ form.last_name }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_date_of_birth">
+                                    Date Of Birth:
+                                </label>
+                                <div class="ui-widget">
+                                    <div class="col-sm-7">
+                                        <div class="ui-widget-header">
+                                            <input id="id_date_of_birth" name="date_of_birth" type="date" value="{{ user.date_of_birth }}" contenteditable="true"/>
+                                        </div>
+                                        <div class="ui-widget-content">
+                                            <script type="text/javascript" src="{% static 'folders/js/jquery.js' %}"></script>
+                                            <script type="text/javascript" src="{% static 'folders/js/jquery-ui.js' %}"></script>
+                                            <script type="text/javascript" src="{% static 'folders/js/calendar.js' %}"></script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_address">
+                                    Address:
+                                </label>
+                                {{ form.address }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_city">
+                                    City:
+                                </label>
+                                {{ form.city }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_state">
+                                    State:
+                                </label>
+                                {{ form.state }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_country">
+                                    Country:
+                                </label>
+                                {{ form.country }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="id_mobile">
+                                    Mobile:
+                                </label>
+                                {{ form.mobile }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-4">
+                                    <button type="submit" class="btn btn-success">Update</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

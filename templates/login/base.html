@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title%}Cloud{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'upload/style.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family-satisfy" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand glyphicon glyphicon-cloud" href="{% url 'login:home' %}">Cloud</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav">
+                    <li class="{% block about_us_active %}{% endblock %}">
+                        <a href="{% url 'login:about_us' %}">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; About Us
+                        </a>
+                    </li>
+                    <li class="{% block services_active %}{% endblock %}">
+                        <a href="{% url 'login:services' %}">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; Services
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="{% block registration_active %}{% endblock %}">
+                        <a href="{% url 'login:registration' %}">
+                            <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span>&nbsp; SignUp For Free
+                        </a>
+                    </li>
+                    <li class="{% block login_user_active %}{% endblock %}">
+                        <a href="{% url 'login:login' %}">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; LogIn
+                        </a>
+                    </li>
+                    <li class="{% block login_admin_active %}{% endblock %}">
+                        <a href="{% url 'login:admin_login' %}">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp; Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block navigation%}
+    {% endblock %}
+</body>
+</html>

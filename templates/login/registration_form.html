@@ -1,0 +1,101 @@
+{% extends 'login/base.html' %}
+{% block title %}Cloud | New Registration{% endblock %}
+{% block registration_active %}active{% endblock %}
+{% block navigation%}
+<div class="container-fluid col-sm-10" style="margin-top: 50px; margin-left: 500px;">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="panel panel-default" style="background: transparent">
+                <div class="panel-body">
+                    <div class="page-header">
+                        {% if msg %}
+                            <p><strong><font color="#dc143c">{{ msg }}</font></strong></p>
+                        {% endif %}
+                    </div>
+                    <form class="form-horizontal" role="form" action="{% url 'login:registration' %}" method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        {{form.non_field_errors}}
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="User Name" id="id_username" type="text" name="username" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Email Address" id="id_email" type="email" name="email" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-king"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="First Name" id="id_first_name" type="text" name="first_name" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-bishop"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Last Name" id="id_last_name" type="text" name="last_name"/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="DD-MM-YYYY" id="id_date_of_birth" type="date" name="date_of_birth"/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Address" id="id_address" type="text" name="address" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="City Name" id="id_city" type="text" name="city" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="State Name" id="id_state" type="text" name="state" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Country Name" id="id_country" type="text" name="country" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Mobile" id="id_mobile" type="text" name="mobile" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-camera"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Avatar (Photo of you)" id="id_avatar" type="file" name="avatar" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Password" id="id_password" type="password" name="password" required/>
+                        </div><br>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" autofocus="autofocus" placeholder="Re-Type Password Again" id="id_confirm_password" type="password" name="confirm_password" required/>
+                        </div><br>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-5">
+                                <button type="submit" class="btn btn-success">Register</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Already had an account? <a href="{% url 'login:login' %}">Click here</a> to login.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

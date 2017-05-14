@@ -1,0 +1,19 @@
+{% extends "login/base.html" %}
+{% block navigation %}
+
+    <div class="container-fluid bg-grey text-center">
+        {% if user.username %}
+            Welcome, {{user.username}}!
+        {% else %}
+            <h4>Hello User!</h4>
+        {% endif %}
+    </div>
+    <div class="container-fluid text-center">
+        <br><br>
+        <h4>We regret you for the inconvenience made by us that forces you to delete your account. If you have changed
+            your mind to access the free Cloud account once again please <a href="{% url 'login:registration' %}">Click here
+            </a> to register</h4>
+        <br>
+    </div>
+
+{% endblock %}

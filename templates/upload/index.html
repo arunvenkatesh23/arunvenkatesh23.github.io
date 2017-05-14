@@ -1,0 +1,136 @@
+{% extends 'upload/base.html' %}
+{% block title %}Cloud | All Folders{% endblock %}
+{% block folder_active %}active{% endblock %}
+{% block navigation%}
+<div class="folders-container container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" {% if filter_by == 'favorites' %}class="active" {% endif %}><a href="{% url 'upload:folders' 'favorites' %}">View Favorites</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Folders -->
+    <div class="row">
+
+        {% if folder %}
+            {% for folder in folder %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail" style="background: transparent">
+                        <a href="{% url 'upload:detail' folder.id %}">
+                            <img src="{{ folder.folder_image.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h3><!-- Favorite Album -->
+                            <a style="background: transparent; border: transparent" href="{% url 'upload:favorite_folder' folder.id %}" class="btn btn-default btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-heart {% if folder.is_favorite %}active{% endif %}"></span>
+                            </a>{{ folder.folder_name }}</h3>
+
+                            <!-- View Details -->
+                            <a href="{% url 'upload:detail' folder.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete Folder -->
+                            <form action="{% url 'upload:folder_delete' folder.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="folder_id" value="{{ folder.id }}" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Update Folder -->
+                            <form action="{% url 'upload:folder_update' folder.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="folder_id" value="{{ folder.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12 {% block add_folder_active %}{% endblock %}">
+                <br>
+                <a href="{% url 'upload:folder_add' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Folder
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- If user searches and there are files -->
+
+    {% if files %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3><small><font color="black">Files</font></small></h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="background: transparent; border: transparent">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Song Name</th>
+                                    <th>Favourite</th>
+                                    <th>Audio File</th>
+                                    <th>Actions</th>
+                                    <th>Folder</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if folder %}
+                                    {% for folder in folder %}
+                                        {% for file in files %}
+                                            <tr>
+                                                <td>{{ file.file_name }}</td>
+                                                <td>
+                                                    <a href="{% url 'upload:favorite_file' file.folder.id file.id %}" class="btn-favorite"><span class="glyphicon glyphicon-heart {% if file.is_favorite %}active{% endif %}"></span></a>
+                                                </td>
+                                                <td>
+                                                    <a target="_blank" href="{{ file.audio_file.url }}">
+                                                        <button type="button" class="btn btn-success btn-xs">
+                                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form action="{% url 'upload:file_delete' folder.id file.id %}" method="post" style="display: inline;">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="folder_id" value="{{ folder.id }}" />
+                                                        <input type="hidden" name="file_id" value="{{ file.id }}" />
+                                                        <button type="submit" class="btn btn-danger btn-xs">
+                                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="{% url 'upload:detail' file.folder.id %}">
+                                                        <img src="{{ file.folder.folder_image.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                                    </a>
+                                                    <a href="{% url 'upload:detail' file.folder.id %}">{{ file.folder.folder_name }}</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

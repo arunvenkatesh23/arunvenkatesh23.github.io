@@ -1,0 +1,92 @@
+{% extends 'upload/base.html' %}
+{% block title %}Cloud | {{ folder }}{% endblock %}
+{% block folders_active %}active{% endblock %}
+
+{% block navigation%}
+<div class="container-fluid files-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default" style="background: transparent">
+                <div class="panel-body">
+                    <a href="{% url 'upload:detail' folder.id%}">
+                        {% if folder.folder_image %}
+                            <img src="{{ folder.folder_image.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h3>{{ folder.folder_name }}</h3>
+                    <h5 style="color: #255625; font-size: small">{{ folder.about_file }}</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px">
+                <li role="presentation" class="active"><a href="{% url 'upload:detail' folder.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url 'upload:file_add' folder.id %}">Add New Song</a></li>
+            </ul>
+
+            <div class="panel panel-default" style="background: transparent; border: transparent">
+                <div class="panel-body">
+
+                    <h3>All Songs</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Song Name</th>
+                            <th>Favourite</th>
+                            <th>Audio File</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in folder.file_set.all %}
+                            <tr>
+                                <td>{{ file.file_name }}</td>
+                                <td>
+                                    <a href="{% url 'upload:favorite_file' folder.id file.id %}" class="btn-favorite"><span class="glyphicon glyphicon-heart {% if file.is_favorite %}active{% endif %}"></span></a>
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{ file.file.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                        </button>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <form action="{% url 'upload:file_delete' folder.id file.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="file_id" value="{{ file.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
