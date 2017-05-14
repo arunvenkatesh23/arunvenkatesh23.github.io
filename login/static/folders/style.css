@@ -1,0 +1,93 @@
+.navbar{
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.navbar .container-fluid a:hover{
+    color: orange;
+}
+
+.navbar .container-fluid li a:hover{
+    color: orange;
+}
+
+.navbar .container-fluid .active a{
+    color: orange;
+}
+
+.navbar .dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+.navbar .container-fluid .dropdown .active a{
+    color: orange;
+}
+
+.folders-container .row li a:hover{
+    color: orange;
+}
+
+.files-container .row li a:hover{
+    color: orange;
+}
+
+.files-container .row .active a{
+    color: orange;
+    background: white;
+}
+
+.container-fluid .panel-body .row h4 a:hover{
+    color: orange;
+}
+
+.navbar .container-fluid .collapse button:hover{
+    color: orange;
+}
+
+.files-container .row .nav-pills li a:hover{
+    color: orange;
+    background: white;
+}
+
+.files-container .row .nav-pills .active a{
+    color: orange;
+    background: white;
+}
+
+.container-fluid .row .nav-pills li a:hover{
+    color: orange;
+    background: white;
+}
+
+.container-fluid .row .nav-pills .active a{
+    color: orange;
+    background: white;
+}
+
+.navbar-brand{
+    font-family: "satisfy", cursive;
+}
+
+body{
+    background: url("images/grass-1366x768.jpg"), transparent;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-top: 6rem !important;
+    -webkit-background-size: cover;
+}
+
+a{
+    color: black;
+}
+
+.glyphicon-heart {
+    color: white;
+    font-size: 20px;
+}
+
+.glyphicon-heart.active {
+    color: crimson;
+}

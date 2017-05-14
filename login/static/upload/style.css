@@ -1,0 +1,35 @@
+.navbar{
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.navbar .container-fluid a:hover{
+    color: orange;
+}
+
+.navbar .container-fluid li a:hover{
+    color: orange;
+}
+
+.navbar .container-fluid .active a{
+    color: orange;
+}
+
+.navbar-brand{
+    font-family: "satisfy", cursive;
+}
+
+body{
+    background: url("images/durdle_door_coastline_5k-1366x768.jpg"), transparent;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-top: 6rem !important;
+    -webkit-background-size: cover;
+}
+
+label{
+    color: white;
+}
